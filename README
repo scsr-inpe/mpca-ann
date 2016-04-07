@@ -1,0 +1,80 @@
+mpcaANN/
+├── annMLP
+├── annMPCA
+├── Makefile
+├── README
+├── runMPCA
+├── build/
+│   ├── *.o
+├── config/
+│   ├── annConfig.in
+│   ├── boundsMPCA.in
+│   ├── iniConfigMPCA.in
+│   └── parametersMPCA.in
+├── data/
+│   ├── x.txt
+│   ├── x_gen.txt
+│   ├── x_valid.txt
+│   ├── yd.txt
+│   ├── yd_valid.txt
+│   └── y_gen.txt
+├── output/
+│   ├── final.out
+│   ├── nn.best
+│   ├── nn*.out
+│   └── result_ys.out
+└── src/
+    ├── annGeneralization.f90
+    ├── global.f90
+    ├── main_generalization.f90
+    ├── ModuloRNA.f90
+    ├── mpca.f90
+    ├── mpcaFunctions.f90
+    ├── newTypes.f90
+    ├── normalR8.f90
+    └── uniformR8.f90
+
+I- Configuring the experiment
+
+parametersMPCA.in -- File with the configuration of the optimization problem
+Line1	Number of patterns
+Line2	Number of patterns cross-validation
+Line3	Number of inputs
+Line4	Number of outputs
+Line5	Minimum value of the objective function (error) (stopping criterium for MPCA)
+Line6	Maximum epoch number (stopping criterium for MPCA);
+Line7	Initialization of the weights and bias		[T; F]
+	T - Random weights and bias
+	F - Weights and bias fixed in 0.5
+Line8	Validation					[T; F]
+	T - Training with validation
+	F - Training without validation
+
+iniConfigMPCA.in -- File with the initial topology of the optimization problem
+Line1	Initial configuration for the topology		[T; F]
+	T - Empirical configuration
+	F - Random configuration
+Line2	Number of hiden layer				[1; 2]
+Line3	Number of neurons in the first hiden layer (D)	[1 - 40]
+Line4	Number of neurons in the second hiden layer (D)	[1 - 40]
+Line5	Activation function (D)				[(1) log; (2) tang; (3) gauss]
+Line6	Momentum rate - alpha (C)			[0.01 - 0.9]
+Line7	Learning rate - eta (C)				[0.01 - 1]
+
+boundsMPCA.in -- File with the lower and upper bounds for the optimization process
+Line1	Number of hiden layers (D)			[1; 2]
+Line2	Number of neurons in the first hiden layer (D)	[1 - 40]
+Line3	Number of neurons in the second hiden layer (D)	[1 - 40]
+Line4	Activation function (D)				[(1) log; (2) tang; (3) gauss]
+Line5	Momentum rate - alpha (C)			[0.01 - 0.9]
+Line6	Learning rate - eta (C)				[0.01 - 1]
+
+II- How to run the ANN auto-configuration
+
+./runMPCA E P
+
+E: total of trials
+P: processor number
+
+Example:
+./runMPCA 5 4
