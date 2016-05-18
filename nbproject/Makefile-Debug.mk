@@ -21,7 +21,7 @@ FC=gfortran
 AS=as
 
 # Macros
-CND_PLATFORM=GNU-Linux-x86
+CND_PLATFORM=GNU-Linux
 CND_DLIB_EXT=so
 CND_CONF=Debug
 CND_DISTDIR=dist
@@ -35,9 +35,11 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/src/Globais.o \
-	${OBJECTDIR}/src/ModuloRNA.o \
+	${OBJECTDIR}/src/annActivation.o \
 	${OBJECTDIR}/src/annGeneralization.o \
+	${OBJECTDIR}/src/annTraining.o \
+	${OBJECTDIR}/src/foul.o \
+	${OBJECTDIR}/src/main_activation.o \
 	${OBJECTDIR}/src/main_generalization.o \
 	${OBJECTDIR}/src/mpca.o \
 	${OBJECTDIR}/src/mpcaFunctions.o \
@@ -70,17 +72,25 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/mpcaann: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.f} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/mpcaann ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/src/Globais.o: src/Globais.f90 
+${OBJECTDIR}/src/annActivation.o: src/annActivation.f90 
 	${MKDIR} -p ${OBJECTDIR}/src
-	$(COMPILE.f) -g -o ${OBJECTDIR}/src/Globais.o src/Globais.f90
-
-${OBJECTDIR}/src/ModuloRNA.o: src/ModuloRNA.f90 
-	${MKDIR} -p ${OBJECTDIR}/src
-	$(COMPILE.f) -g -o ${OBJECTDIR}/src/ModuloRNA.o src/ModuloRNA.f90
+	$(COMPILE.f) -g -o ${OBJECTDIR}/src/annActivation.o src/annActivation.f90
 
 ${OBJECTDIR}/src/annGeneralization.o: src/annGeneralization.f90 
 	${MKDIR} -p ${OBJECTDIR}/src
 	$(COMPILE.f) -g -o ${OBJECTDIR}/src/annGeneralization.o src/annGeneralization.f90
+
+${OBJECTDIR}/src/annTraining.o: src/annTraining.f90 
+	${MKDIR} -p ${OBJECTDIR}/src
+	$(COMPILE.f) -g -o ${OBJECTDIR}/src/annTraining.o src/annTraining.f90
+
+${OBJECTDIR}/src/foul.o: src/foul.f90 
+	${MKDIR} -p ${OBJECTDIR}/src
+	$(COMPILE.f) -g -o ${OBJECTDIR}/src/foul.o src/foul.f90
+
+${OBJECTDIR}/src/main_activation.o: src/main_activation.f90 
+	${MKDIR} -p ${OBJECTDIR}/src
+	$(COMPILE.f) -g -o ${OBJECTDIR}/src/main_activation.o src/main_activation.f90
 
 ${OBJECTDIR}/src/main_generalization.o: src/main_generalization.f90 
 	${MKDIR} -p ${OBJECTDIR}/src

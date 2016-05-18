@@ -1,5 +1,5 @@
 #!/bin/bash
-# Script for running the auto-configuration and activation of ANN
+# Script for auto-configuring the Artificial Neural Network
 
 make
 
@@ -9,10 +9,8 @@ rm -f ./output/*.dat
 EXP=$1
 PRC=$2
 
-for (( j=1; j<=$EXP; j++ ))
+clear
+for (( j=1; j<= $EXP; j++ ))
 do
-	echo 'Experiment ' $j
-        mpirun -n $PRC ./annMPCA $j 100 false
+    mpirun -n $PRC ./annMPCA $j
 done
-
-./annMLP $EXP $PRC

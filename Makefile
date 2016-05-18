@@ -5,44 +5,45 @@
 CC= mpif90 
 
 # Opcoes de compilacao
-CFLAG= -c -O3
+CFLAG= -c -O3 -g
 
 # Opcoes de otimizacao
-CFLAGOPT= -O3
+CFLAGOPT= -O3 -g
 
-# Para Tupa
-# nr= ../nr2f90/mod/
+VPATH = src
+MODDIR = mod
+BUILDDIR = build
 
-nr= ../nr2f90/mpif90/mod/
-
-VPATH = src/
-MODDIR = mod/
-BUILDDIR = build/
-
-all: annMPCA annMLP removemod
+all: clean $(BUILDDIR)/foul.o \
+	$(BUILDDIR)/newTypes.o \
+	$(BUILDDIR)/uniformR8.o \
+	$(BUILDDIR)/normalR8.o \
+	$(BUILDDIR)/annTraining.o \
+	$(BUILDDIR)/mpcaFunctions.o \
+	$(BUILDDIR)/mpca.o \
+	$(BUILDDIR)/annActivation.o \
+	$(BUILDDIR)/annGeneralization.o \
+	$(BUILDDIR)/main_generalization.o \
+	$(BUILDDIR)/main_activation.o \
+	annMPCA \
+	annMLP \
+	annActivation \
+	removemod
 	
-annMPCA: $(BUILDDIR)/newTypes.o $(BUILDDIR)/uniformR8.o $(BUILDDIR)/normalR8.o \
-	$(BUILDDIR)/Globais.o $(BUILDDIR)/ModuloRNA.o\
-	$(BUILDDIR)/mpcaFunctions.o $(BUILDDIR)/mpca.o
-	$(CC) $(CFLAGOPT) -o annMPCA $(BUILDDIR)/uniformR8.o $(BUILDDIR)/normalR8.o $(BUILDDIR)/Globais.o $(BUILDDIR)/ModuloRNA.o $(BUILDDIR)/newTypes.o $(BUILDDIR)/mpcaFunctions.o $(BUILDDIR)/mpca.o ../nr2f90/mpif90/lib/libnr2f90.a
+annMPCA: 
+	$(CC) $(CFLAGOPT) -o annMPCA $(BUILDDIR)/foul.o $(BUILDDIR)/uniformR8.o $(BUILDDIR)/newTypes.o $(BUILDDIR)/normalR8.o $(BUILDDIR)/annTraining.o $(BUILDDIR)/mpcaFunctions.o $(BUILDDIR)/mpca.o
 
-annMLP:	$(BUILDDIR)/Globais.o $(BUILDDIR)/annGeneralization.o $(BUILDDIR)/main_generalization.o
-	$(CC) $(CFLAGOPT) -o annMLP $(BUILDDIR)/Globais.o $(BUILDDIR)/annGeneralization.o $(BUILDDIR)/main_generalization.o
+annMLP:	
+	$(CC) $(CFLAGOPT) -o annMLP $(BUILDDIR)/foul.o $(BUILDDIR)/newTypes.o $(BUILDDIR)/annGeneralization.o $(BUILDDIR)/main_generalization.o
+	
+annActivation:
+	$(CC) $(CFLAGOPT) -o annActivation $(BUILDDIR)/foul.o $(BUILDDIR)/newTypes.o $(BUILDDIR)/annActivation.o $(BUILDDIR)/main_activation.o
 
 $(BUILDDIR)/%.o: $(VPATH)/%.f90
 	$(CC) $(CFLAG) $< -o $@
 
-$(BUILDDIR)/mpca.o: mpca.f90
-	$(CC) $(CFLAG) src/mpca.f90 -I $(nr) -o $@
-
-$(BUILDDIR)/oppositionFunctions.o: oppositionFunctions.f90
-	$(CC) $(CFLAG) src/oppositionFunctions.f90 -I $(nr) -o $@
-
-$(BUILDDIR)/mpcaFunctions.o: mpcaFunctions.f90 
-	$(CC) $(CFLAG) src/mpcaFunctions.f90 -I $(nr) -o $@
-
 clean:
-	rm -rf *.*~ Makefile~ *.o *.mod annMLP annMPCA output/*.out
+	rm -rf *.*~ Makefile~ build/*.o *.mod annActivation annMLP annMPCA output/*.out
 
 removemod:
 	rm -f build/*.o *.mod

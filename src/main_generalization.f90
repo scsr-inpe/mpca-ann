@@ -1,6 +1,5 @@
 PROGRAM MAIN_GENERALIZATION
     USE annGeneralization
-    USE Globais
     USE newTypes
 
     implicit none
