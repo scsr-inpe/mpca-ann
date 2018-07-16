@@ -34,7 +34,7 @@ mpcaANN/
     ├── normalR8.f90
     └── uniformR8.f90
 
-I- Configuring the experiment
+1.- Configuring the experiment
 
 parametersMPCA.in -- File with the configuration of the optimization problem
 Line1	Number of patterns
@@ -69,7 +69,7 @@ Line4	Activation function (D)				[(1) log; (2) tang; (3) gauss]
 Line5	Momentum rate - alpha (C)			[0.01 - 0.9]
 Line6	Learning rate - eta (C)				[0.01 - 1]
 
-II- How to run the ANN auto-configuration
+2.- How to run the ANN auto-configuration
 
 ./runMPCA E P
 
