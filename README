@@ -2,38 +2,33 @@
 
 ##1.- How to configure the experiments##
 
-parametersMPCA.in -- File with the configuration of the optimization problem
-Line1	Number of patterns
-Line2	Number of patterns cross-validation
-Line3	Number of inputs
-Line4	Number of outputs
-Line5	Minimum value of the objective function (error) (stopping criterium for MPCA)
-Line6	Maximum epoch number (stopping criterium for MPCA);
-Line7	Initialization of the weights and bias		[T; F]
-	T - Random weights and bias
-	F - Weights and bias fixed in 0.5
-Line8	Validation					[T; F]
-	T - Training with validation
-	F - Training without validation
+###parametersMPCA.in -- File with the configuration of the optimization problem###
 
-iniConfigMPCA.in -- File with the initial topology of the optimization problem
-Line1	Initial configuration for the topology		[T; F]
-	T - Empirical configuration
-	F - Random configuration
-Line2	Number of hiden layer				[1; 2]
-Line3	Number of neurons in the first hiden layer (D)	[1 - 40]
-Line4	Number of neurons in the second hiden layer (D)	[1 - 40]
-Line5	Activation function (D)				[(1) log; (2) tang; (3) gauss]
-Line6	Momentum rate - alpha (C)			[0.01 - 0.9]
-Line7	Learning rate - eta (C)				[0.01 - 1]
+-Line1	Number of patterns
+-Line2	Number of patterns cross-validation
+-Line3	Number of inputs
+-Line4	Number of outputs
+-Line5	Minimum value of the objective function (error) (stopping criterium for MPCA)
+-Line6	Maximum epoch number (stopping criterium for MPCA);
+-Line7	Initialization of the weights and bias (T - Random weights and bias; F - Weights and bias fixed in 0.5)
+-Line8	Validation (T - Training with validation; F - Training without validation)
 
-boundsMPCA.in -- File with the lower and upper bounds for the optimization process
-Line1	Number of hiden layers (D)			[1; 2]
-Line2	Number of neurons in the first hiden layer (D)	[1 - 40]
-Line3	Number of neurons in the second hiden layer (D)	[1 - 40]
-Line4	Activation function (D)				[(1) log; (2) tang; (3) gauss]
-Line5	Momentum rate - alpha (C)			[0.01 - 0.9]
-Line6	Learning rate - eta (C)				[0.01 - 1]
+###iniConfigMPCA.in -- File with the initial topology of the optimization problem###
+-Line1	Initial configuration for the topology (T - Empirical configuration; F - Random configuration)
+-Line2	Number of hiden layer				[1; 2]
+-Line3	Number of neurons in the first hiden layer (D)	[1 - 40]
+-Line4	Number of neurons in the second hiden layer (D)	[1 - 40]
+-Line5	Activation function (D)				[(1) log; (2) tang; (3) gauss]
+-Line6	Momentum rate - alpha (C)			[0.01 - 0.9]
+-Line7	Learning rate - eta (C)				[0.01 - 1]
+
+###boundsMPCA.in -- File with the lower and upper bounds for the optimization process###
+-Line1	Number of hiden layers (D)			[1; 2]
+-Line2	Number of neurons in the first hiden layer (D)	[1 - 40]
+-Line3	Number of neurons in the second hiden layer (D)	[1 - 40]
+-Line4	Activation function (D)				[(1) log; (2) tang; (3) gauss]
+-Line5	Momentum rate - alpha (C)			[0.01 - 0.9]
+-Line6	Learning rate - eta (C)				[0.01 - 1]
 
 ##2.- How to run the ANN auto-configuration##
 
