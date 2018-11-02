@@ -2,8 +2,10 @@
 
 ##0.- Prerequisites
 
+-- Install openmpi
+
 ```
-sudo apt install libcr-dev mpich2 mpich2-doc
+sudo apt install openmpi-bin libopenmpi-dev
 ```
 
 ##0.1- Installing
