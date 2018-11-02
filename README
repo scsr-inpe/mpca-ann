@@ -29,93 +29,148 @@ make
 
 The experiment configuration and the control parameters of the optimization algorithm are set in the file `configuration.ini` which is located in the subdirectory `config`:
 
-* NCLASSES=8600,
-* NCLASSESVALIDATION=1000,
-* NINPUTS=2,
-* NOUTPUTS=1,
-* TARGETERROR=1.0E-5,
-* NEPOCHS=200, Número limite de iterações para otimização da rede / Número de épocas
-* LOADWEIGHTSBIAS=1, Carregar pesos e vieses. 0 para não carregar ou 1 para carregar
-* HAVEVALIDATION=T,
-* TRYINITIALARCHITECTURE=F, injeta uma boa solução inicial contida no  arquivo
+###1.1 Configuration of the neural networks model###
+* NCLASSES=8600, Number of patterns
+* NCLASSESVALIDATION=1000, Number of patterns for validation
+* NINPUTS=2, Number of inputs
+* NOUTPUTS=1, Number of outputs
+* TARGETERROR=1.0E-5, Value of error to be reached
+* NEPOCHS=200, Maximum number of epochs (iterations of the training process)
+* LOADWEIGHTSBIAS=1, Load predefined weights and biases.  If 0, weights and bias are fixed in 0.5. If 1, random weights and bias will be loaded. If 3, weights and bias are loaded from the file ``data/nn.initial``.
+* HAVEVALIDATION=T, If T, train with validation; if F, do not use validation
+* TRYINITIALARCHITECTURE=F, Try an initial (good?) architecture as initial solution. If F do not load. if V load configurations defined in 1.3.
 
+###1.2 Limits (search space) of the architecture of the neural network and the training parameters###
 * LOWER_HIDDEN_LAYERS=1,
-* UPPER_HIDDEN_LAYERS=1,
-* LOWER_FIRST_HIDDEN_LAYER=5,
-* UPPER_FIRST_HIDDEN_LAYER=25,
-* LOWER_SECOND_HIDDEN_LAYER=5,
-* UPPER_SECOND_HIDDEN_LAYER=25,
+* UPPER_HIDDEN_LAYERS=2,
+* LOWER_FIRST_HIDDEN_LAYER=1,
+* UPPER_FIRST_HIDDEN_LAYER=40,
+* LOWER_SECOND_HIDDEN_LAYER=1,
+* UPPER_SECOND_HIDDEN_LAYER=40,
 * LOWER_ACTIVATION_FUNCTION=1,
-* UPPER_ACTIVATION_FUNCTION=1,
+* UPPER_ACTIVATION_FUNCTION=3,
 * LOWER_ALPHA=1.0E-2,
 * UPPER_ALPHA=0.9,
 * LOWER_ETA=1.0E-2,
 * UPPER_ETA=1.0,
 
-* INITIAL_HIDDEN_LAYERS=1,
-* INITIAL_FIRST_HIDDEN_LAYER=10,
-* INITIAL_SECOND_HIDDEN_LAYER=0,
-* INITIAL_ACTIVATION_FUNCTION=2,
-* INITIAL_ALPHA=0.0,
-* INITIAL_ETA=0.94,
+###1.3 Initial topology of the neural network###
+* INITIAL_HIDDEN_LAYERS=1, Number of hidden layers. Discrete [1; 2]
+* INITIAL_FIRST_HIDDEN_LAYER=10, Number of neurons in the first hiden layer. Discrete  [1 - 40]
+* INITIAL_SECOND_HIDDEN_LAYER=0, Number of neurons in the second hiden layer. Discrete  [1 - 40]
+* INITIAL_ACTIVATION_FUNCTION=2, Activation function. Discrete [(1) logistic; (2) tangent; (3) gaussian]
+* INITIAL_ALPHA=0.0, Momentum rate - alpha. Continuous [0.01 - 0.9]
+* INITIAL_ETA=0.94, Learning rate - eta. Continuous [0.01 - 1]
 
-* VALUE_TO_REACH=1.0E-7, Valor mínimo a ser alcançado pelo erro
-* PARTICLES_PROCESSOR=10, Número de partículas por processador
-* MAXIMUM_NFE_MPCA=50000, Parâmetro de controle do MPCA. Número máximo de avaliações da função objetivo para o MPCA
-* CYCLE_BLACKBOARD_MPCA=5000, Parâmetro de controle do MPCA. Número de avaliações da função objetivo para realizar o processo de blackboard do MPCA, onde todas as partículas ficam conhecendo a melhor partícula
-* NFE_EXPLOITATION_MPCA=1000, Parâmetro de controle do MPCA. Número máximo de avaliações da função objetivo na etapa de intensificação do MPCA
-* LOWER_EXPLOITATION_MPCA=0.7, Parâmetro de controle do MPCA.
-* UPPER_EXPLOITATION_MPCA= 1.1, Parâmetro de controle do MPCA.
-* TYPE_PROBABILITY_MPCA=1, Parâmetro de controle do MPCA. Tipo de probabilidade utilizado no processo de espalhamento
-* ENABLE_OPPOSITION=T, Habilitar oposição. T para habilitar ou F para desabilitar
-* TYPE_OPPOSITION="MPCA", Tipo de Oposição utilizada: MPCA (sem Oposição), 
-* JUMPING_RATE_OPPOSITION=0.01, Parâmetro de controle da Oposição. Probabilidade de aplicar a Oposição numa partícula
-* EPSILON_HOOKE_JEEVES=1.0E-11, Parâmetro de controle do Hooke-Jeeves
-* RHO_HOOKE_JEEVES= 0.8, Parâmetro de controle do Hooke-Jeeves
-* MAXIMUM_NFE_HOOKE_JEEVES=1000, Parâmetro de controle do Hooke-Jeeves. Número máximo de avaliações da função objetivo para o Hooke-Jeeves
-* VERBOSE=T
+###Configuration of the optimization algorithm###
 
-###parametersMPCA.in -- File with the configuration of the optimization problem###
+Multi-particla collision algorithm
 
-1.	Number of patterns
-2.	Number of patterns cross-validation
-3.	Number of inputs
-4.	Number of outputs
-5.	Minimum value of the objective function (error) (stopping criterium for MPCA)
-6.	Maximum epoch number (stopping criterium for MPCA);
-7.	Initialization of the weights and bias (T - Random weights and bias; F - Weights and bias fixed in 0.5)
-8.	Validation (T - Training with validation; F - Training without validation)
+* VALUE_TO_REACH=1.0E-7, Stopping criterium. Minimum value of the objective function.
+* PARTICLES_PROCESSOR=10, Number of particles in each processor
+* MAXIMUM_NFE_MPCA=50000, Maximum number of function evaluation
+* CYCLE_BLACKBOARD_MPCA=5000, Number of function evaluation to update the blackboard strategy. In blackboard, all particles know the best overall particle.
+* NFE_EXPLOITATION_MPCA=1000, Number of function evaluation in the exploitation phase
+* LOWER_EXPLOITATION_MPCA=0.7, Control parameter
+* UPPER_EXPLOITATION_MPCA= 1.1, Control parameter.
+* TYPE_PROBABILITY_MPCA=1, Probability distribution used in the scattering mechanism
 
+Opposition (Hybrid variant)
 
-###iniConfigMPCA.in -- File with the initial topology of the optimization problem###
-1.	Initial configuration for the topology (T - Empirical configuration; F - Random configuration)
-2.	Number of hiden layer				[1; 2]
-3.	Number of neurons in the first hiden layer (D)	[1 - 40]
-4.	Number of neurons in the second hiden layer (D)	[1 - 40]
-5.	Activation function (D)				[(1) log; (2) tang; (3) gauss]
-6.	Momentum rate - alpha (C)			[0.01 - 0.9]
-7.	Learning rate - eta (C)				[0.01 - 1]
+* ENABLE_OPPOSITION=T, Enable opposition. If T, enables opposition. If F, dissables opposition
+* TYPE_OPPOSITION="MPCA", Opposition type: MPCA (sem Oposição), ...
 
-###boundsMPCA.in -- File with the lower and upper bounds for the optimization process###
-1.	Number of hiden layers (D)			[1; 2]
-2.	Number of neurons in the first hiden layer (D)	[1 - 40]
-3. Number of neurons in the second hiden layer (D)	[1 - 40]
-4.	Activation function (D)				[(1) log; (2) tang; (3) gauss]
-5.	Momentum rate - alpha (C)			[0.01 - 0.9]
-6.	Learning rate - eta (C)				[0.01 - 1]
+Hooke-Jeeve - Intensification phase (Hybrid variant)
 
-##2.- How to run the ANN auto-configuration##
+* JUMPING_RATE_OPPOSITION=0.01, Probability to apply opposition in a particle
+* EPSILON_HOOKE_JEEVES=1.0E-11, Control parameter
+* RHO_HOOKE_JEEVES= 0.8, Control parameter
+* MAXIMUM_NFE_HOOKE_JEEVES=1000, Maximum number of function evaluation
+
+General
+
+* VERBOSE=T, Displays extended information
+
+##2.- Data##
+
+###Training data###
+The training data are loaded from the files ``data/x.txt`` and ``data/y.txt``. Data is formated as F8.5 in Fortran, as ``      -0.07621``, with eight places before the decimal point and five decimal places.
+Rows represent the inputs or the output, while columns contain the classes.
+
+###Validation data###
+
+The validation data are loaded from the files ``data/x_valid.txt`` and ``data/y_valid.txt``. Data is formated as F8.5 in Fortran, as ``      -0.07621``, with eight places before the decimal point and five decimal places.
+Rows represent the inputs or the output, while columns contain the classes.
+
+##3.- How to run the auto-configuration of the neural network##
 
 ```
 ./runMPCA E P
 ```
 
+where E is the total of experiments and P is the number of processors to be used.
 
-E: total of trials
-P: processor number
-
-###Example:###
+For example,
 
 ```
 ./runMPCA 5 4
 ```
+
+runs the five experiments with four processor working.
+
+##4.- Output data##
+
+After the optimization process, the best configurations found will be available in the output folder.
+
+The ``final.out`` shows a summary of the experiments. Each line represents an experiment:
+
+```
+  8.540212E-02 1  5  0 1  3.771149E-01  3.906986E-01
+```
+
+The output folder contains files ``ann#.best``. This files contains the best configuration found in the experiment with number #.
+
+An output file is formated as follows:
+```
+  8.536407E-02
+  1
+  7
+wh1
+  -10.86851    2.11830    0.97716    1.02200    1.62511   -0.56027    2.68275
+  -10.36335    1.49072    1.27402    0.72460    1.27691   -0.41907    2.39177
+bh1
+    1.01121    1.19527    1.12059    1.19807    1.18954    0.52760   -0.76000
+ws
+  -10.56349
+    2.14747
+    1.07605
+    0.80109
+    1.53290
+   -0.82369
+    1.77848
+bs
+    4.72634
+Alpha:        0.3566
+Eta:        0.5252
+Activation Function: LOGISTIC
+MeanSquaredError:   2.788083E-03
+MeanSquaredError - validation:   9.362167E-02
+Epoch :       200
+NFE:         22
+```
+
+##4.- Using the best model found##
+
+###Generalization data###
+
+The generalization data are loaded from the files ``data/x_gen.txt`` and ``data/y_gen.txt``. Data is formated as F8.5 in Fortran, as ``      -0.07621``, with eight places before the decimal point and five decimal places.
+Rows represent the inputs or the output, while columns contain the classes.
+
+## Contributors
+
+Haroldo F. Campos Velho, Juliana Anochi, Sabrina Sambati, Eduardo Luz, Reynier Hernández Torres
+
+## License
+
+---
+
