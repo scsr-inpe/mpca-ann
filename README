@@ -29,51 +29,51 @@ make
 
 The experiment configuration and the control parameters of the optimization algorithm are set in the file `configuration.ini` which is located in the subdirectory `config`:
 
- NCLASSES=8600,
- NCLASSESVALIDATION=1000,
- NINPUTS=2,
- NOUTPUTS=1,
- TARGETERROR=1.0E-5,
- NEPOCHS=200, Número limite de iterações para otimização da rede / Número de épocas
- LOADWEIGHTSBIAS=1, Carregar pesos e vieses. 0 para não carregar ou 1 para carregar
- HAVEVALIDATION=T,
- TRYINITIALARCHITECTURE=F, injeta uma boa solução inicial contida no  arquivo
+* NCLASSES=8600,
+* NCLASSESVALIDATION=1000,
+* NINPUTS=2,
+* NOUTPUTS=1,
+* TARGETERROR=1.0E-5,
+* NEPOCHS=200, Número limite de iterações para otimização da rede / Número de épocas
+* LOADWEIGHTSBIAS=1, Carregar pesos e vieses. 0 para não carregar ou 1 para carregar
+* HAVEVALIDATION=T,
+* TRYINITIALARCHITECTURE=F, injeta uma boa solução inicial contida no  arquivo
 
- LOWER_HIDDEN_LAYERS=1,
- UPPER_HIDDEN_LAYERS=1,
- LOWER_FIRST_HIDDEN_LAYER=5,
- UPPER_FIRST_HIDDEN_LAYER=25,
- LOWER_SECOND_HIDDEN_LAYER=5,
- UPPER_SECOND_HIDDEN_LAYER=25,
- LOWER_ACTIVATION_FUNCTION=1,
- UPPER_ACTIVATION_FUNCTION=1,
- LOWER_ALPHA=1.0E-2,
- UPPER_ALPHA=0.9,
- LOWER_ETA=1.0E-2,
- UPPER_ETA=1.0,
+* LOWER_HIDDEN_LAYERS=1,
+* UPPER_HIDDEN_LAYERS=1,
+* LOWER_FIRST_HIDDEN_LAYER=5,
+* UPPER_FIRST_HIDDEN_LAYER=25,
+* LOWER_SECOND_HIDDEN_LAYER=5,
+* UPPER_SECOND_HIDDEN_LAYER=25,
+* LOWER_ACTIVATION_FUNCTION=1,
+* UPPER_ACTIVATION_FUNCTION=1,
+* LOWER_ALPHA=1.0E-2,
+* UPPER_ALPHA=0.9,
+* LOWER_ETA=1.0E-2,
+* UPPER_ETA=1.0,
 
- INITIAL_HIDDEN_LAYERS=1,
- INITIAL_FIRST_HIDDEN_LAYER=10,
- INITIAL_SECOND_HIDDEN_LAYER=0,
- INITIAL_ACTIVATION_FUNCTION=2,
- INITIAL_ALPHA=0.0,
- INITIAL_ETA=0.94,
+* INITIAL_HIDDEN_LAYERS=1,
+* INITIAL_FIRST_HIDDEN_LAYER=10,
+* INITIAL_SECOND_HIDDEN_LAYER=0,
+* INITIAL_ACTIVATION_FUNCTION=2,
+* INITIAL_ALPHA=0.0,
+* INITIAL_ETA=0.94,
 
- VALUE_TO_REACH=1.0E-7, Valor mínimo a ser alcançado pelo erro
- PARTICLES_PROCESSOR=10, Número de partículas por processador
- MAXIMUM_NFE_MPCA=50000, Parâmetro de controle do MPCA. Número máximo de avaliações da função objetivo para o MPCA
- CYCLE_BLACKBOARD_MPCA=5000, Parâmetro de controle do MPCA. Número de avaliações da função objetivo para realizar o processo de blackboard do MPCA, onde todas as partículas ficam conhecendo a melhor partícula
- NFE_EXPLOITATION_MPCA=1000, Parâmetro de controle do MPCA. Número máximo de avaliações da função objetivo na etapa de intensificação do MPCA
- LOWER_EXPLOITATION_MPCA=0.7, Parâmetro de controle do MPCA.
- UPPER_EXPLOITATION_MPCA= 1.1, Parâmetro de controle do MPCA.
- TYPE_PROBABILITY_MPCA=1, Parâmetro de controle do MPCA. Tipo de probabilidade utilizado no processo de espalhamento
- ENABLE_OPPOSITION=T, Habilitar oposição. T para habilitar ou F para desabilitar
- TYPE_OPPOSITION="MPCA", Tipo de Oposição utilizada: MPCA (sem Oposição), 
- JUMPING_RATE_OPPOSITION=0.01, Parâmetro de controle da Oposição. Probabilidade de aplicar a Oposição numa partícula
- EPSILON_HOOKE_JEEVES=1.0E-11, Parâmetro de controle do Hooke-Jeeves
- RHO_HOOKE_JEEVES= 0.8, Parâmetro de controle do Hooke-Jeeves
- MAXIMUM_NFE_HOOKE_JEEVES=1000, Parâmetro de controle do Hooke-Jeeves. Número máximo de avaliações da função objetivo para o Hooke-Jeeves
- VERBOSE=T
+* VALUE_TO_REACH=1.0E-7, Valor mínimo a ser alcançado pelo erro
+* PARTICLES_PROCESSOR=10, Número de partículas por processador
+* MAXIMUM_NFE_MPCA=50000, Parâmetro de controle do MPCA. Número máximo de avaliações da função objetivo para o MPCA
+* CYCLE_BLACKBOARD_MPCA=5000, Parâmetro de controle do MPCA. Número de avaliações da função objetivo para realizar o processo de blackboard do MPCA, onde todas as partículas ficam conhecendo a melhor partícula
+* NFE_EXPLOITATION_MPCA=1000, Parâmetro de controle do MPCA. Número máximo de avaliações da função objetivo na etapa de intensificação do MPCA
+* LOWER_EXPLOITATION_MPCA=0.7, Parâmetro de controle do MPCA.
+* UPPER_EXPLOITATION_MPCA= 1.1, Parâmetro de controle do MPCA.
+* TYPE_PROBABILITY_MPCA=1, Parâmetro de controle do MPCA. Tipo de probabilidade utilizado no processo de espalhamento
+* ENABLE_OPPOSITION=T, Habilitar oposição. T para habilitar ou F para desabilitar
+* TYPE_OPPOSITION="MPCA", Tipo de Oposição utilizada: MPCA (sem Oposição), 
+* JUMPING_RATE_OPPOSITION=0.01, Parâmetro de controle da Oposição. Probabilidade de aplicar a Oposição numa partícula
+* EPSILON_HOOKE_JEEVES=1.0E-11, Parâmetro de controle do Hooke-Jeeves
+* RHO_HOOKE_JEEVES= 0.8, Parâmetro de controle do Hooke-Jeeves
+* MAXIMUM_NFE_HOOKE_JEEVES=1000, Parâmetro de controle do Hooke-Jeeves. Número máximo de avaliações da função objetivo para o Hooke-Jeeves
+* VERBOSE=T
 
 ###parametersMPCA.in -- File with the configuration of the optimization problem###
 
