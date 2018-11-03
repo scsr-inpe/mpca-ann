@@ -95,12 +95,12 @@ General
 
 ###Training data###
 The training data are loaded from the files ``data/x.txt`` and ``data/y.txt``. Data is formated as F8.5 in Fortran, as ``      -0.07621``, with eight places before the decimal point and five decimal places.
-Rows represent the inputs or the output, while columns contain the classes.
+Columns represent the inputs or the output, while rows contain the classes.
 
 ###Validation data###
 
 The validation data are loaded from the files ``data/x_valid.txt`` and ``data/y_valid.txt``. Data is formated as F8.5 in Fortran, as ``      -0.07621``, with eight places before the decimal point and five decimal places.
-Rows represent the inputs or the output, while columns contain the classes.
+Columns represent the inputs or the output, while rows contain the classes.
 
 ##3.- How to run the auto-configuration of the neural network##
 
@@ -164,7 +164,17 @@ NFE:         22
 ###Generalization data###
 
 The generalization data are loaded from the files ``data/x_gen.txt`` and ``data/y_gen.txt``. Data is formated as F8.5 in Fortran, as ``      -0.07621``, with eight places before the decimal point and five decimal places.
-Rows represent the inputs or the output, while columns contain the classes.
+Columns represent the inputs or the output, while rows contain the classes.
+
+The file ``config/annConfig.in`` has the configuration. the first line represent the classes, the second line is the number of inputs, and the third, the number of outputs
+
+###Running the generalization process###
+
+To run the generalization simply execute the following command:
+
+```
+./annMLP
+```
 
 ## Contributors
 
