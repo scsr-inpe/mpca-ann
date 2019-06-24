@@ -336,11 +336,11 @@ CONTAINS
                 enddo
 
                 !TRAINING HIDDEN LAYER 2
+		
                 if (config % hiddenLayers == 2) then
                     do j = 1, config % neuronsLayer(2)
                         dOutput = derivate(vh2(j), yh2(j), config % activationFunction)
-
-                        aux = 0.d0
+			aux = 0.d0
                         if (config % hiddenLayers == 1) then
                             DO k = 1, op % nOutputs
                                 aux = aux + (gradientOutput(k) * config % ws(j, k))
@@ -364,8 +364,7 @@ CONTAINS
 
                 ! TRAINING HIDDEN LAYER 1
                 DO j = 1, config % neuronsLayer(1)
-
-                    aux = 0.d0
+	            aux = 0.d0
                     if (config % hiddenLayers == 1) then
                         do k = 1, op % nOutputs
                             aux = aux + (gradientOutput(k) * config % ws(j, k))
@@ -474,6 +473,7 @@ CONTAINS
             OPEN(12, FILE = './output/ann' // trim(str1) // '_' // trim(str0) // '.out')
 
             write(12, '(ES14.6E2)') st % bestObjectiveFunction
+	    write(12, '(I3)') config % activationFunction
             write(12, '(I3)') config % hiddenLayers
             write(12, '(I3)') config % neuronsLayer(1)
             if (config % hiddenLayers == 2) then

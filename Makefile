@@ -43,7 +43,7 @@ $(BUILDDIR)/%.o: $(VPATH)/%.f90
 	$(CC) $(CFLAG) $< -o $@
 
 clean:
-	rm -rf *.*~ Makefile~ build/*.o *.mod annActivation annMLP annMPCA output/*.out
+	rm -rf *.*~ Makefile~ build/*.o *.mod annActivation annMLP annMPCA
 
 removemod:
 	rm -f build/*.o *.mod

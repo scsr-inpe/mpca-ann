@@ -10,7 +10,7 @@ EXP=$1
 PRC=$2
 
 clear
-for (( j=1; j<= $EXP; j++ ))
+for (( j=1; j<=$EXP; j++ ))
 do
     mpirun -n $PRC ./annMPCA $j
 done

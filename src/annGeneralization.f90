@@ -27,8 +27,11 @@ CONTAINS
         path = 'config/annConfig.in'
         OPEN(UNIT = 30, FILE = TRIM(path), STATUS = "old")
         READ(30, *) config % nClasses
+	write(*,*) config % nClasses
         READ(30, *) config % nInputs
+	write(*,*) config % nInputs
         READ(30, *) config % nOutputs
+	write(*,*) config % nOutputs
         CLOSE(30)
 
         open (unit = 20, file = './output/final.out', status = 'old', action = 'read')
@@ -45,6 +48,10 @@ CONTAINS
                 config % neuronsLayer(1) = neuronsLayer(1)
                 config % neuronsLayer(2) = neuronsLayer(2)
                 config % activationFunction = activationFunction
+		write(*,*) config % hiddenLayers
+		write(*,*) config % neuronsLayer(1)
+		write(*,*) config % neuronsLayer(2)
+		write(*,*) config % activationFunction
             end if
         end do
 
@@ -67,20 +74,13 @@ CONTAINS
                 WRITE (str0, '(I3)') iProcessor
             END IF
 
+	    write(*,*) './output/ann' // trim(str1) // '_' // trim(str0) // '.out'
             open(12, FILE = './output/ann' // trim(str1) // '_' // trim(str0) // '.out')
-            read(12, '(A,ES14.6E2)') fitness
+            read(12, '(ES14.6E2)') fitness
 
+	    write(*,*) bfitness
+	    write(*,*) fitness
             if (bfitness == fitness) then
-
-                allocate(config % bh1(config % neuronsLayer(1)))
-                allocate(config % bs(config % nOutputs))
-                allocate(config % wh1(config % nInputs, config % neuronsLayer(1)))
-                allocate(config % ws(config % neuronsLayer(config % hiddenLayers), config % nOutputs))
-
-                if (config % hiddenLayers == 2) then
-                    allocate(config % bh2(config % neuronsLayer(2)))
-                    allocate(config % wh2(config % nInputs, config % neuronsLayer(2)))
-                end if
 
                 write(*, *) 'Reading best ANN configuration'
                 bProcessor = iProcessor
@@ -88,52 +88,91 @@ CONTAINS
                 open(13, file = './output/nn.best')
                 write(13, '(ES14.6E2)') fitness
 
-                read(12, '(A)') dummy
-                write(13, '(A)') dummy
+		read(12, '(I3)') activationFunction
+		write(13, '(I3)') activationFunction
+		write(*, '(I3)') activationFunction
+                read(12, '(I3)') hiddenLayers
+                write(13, '(I3)') hiddenLayers
+                write(*, '(I3)') hiddenLayers
+		read(12, '(I3)') neuronsLayer(1)
+                write(13, '(I3)') neuronsLayer(1)
+                write(*, '(I3)') neuronsLayer(1)
+		read(12, '(I3)') neuronsLayer(2)
+                write(13, '(I3)') neuronsLayer(2)
+		write(*, '(I3)') neuronsLayer(2)
+		config % activationFunction = activationFunction
+ 		config % hiddenLayers = hiddenLayers
+                config % neuronsLayer(1) = neuronsLayer(1)
+                config % neuronsLayer(2) = neuronsLayer(2)
 
-                fString = '(   F8.5)'
+		read(12, '(A)') dummy
+                write(13, '(A)') dummy
+		write(*, '(A)') dummy
+                allocate(config % bh1(config % neuronsLayer(1)))
+                allocate(config % bs(config % nOutputs))
+                allocate(config % wh1(config % nInputs, config % neuronsLayer(1)))
+
+                fString = '(   F11.5)'
                 write(fString(2:4), '(I3)') config % neuronsLayer(1)
                 DO i = 1, config % nInputs
                     read(12, fString) (config % wh1(i, k), k = 1, config % neuronsLayer(1))
                     write(13, fString) (config % wh1(i, k), k = 1, config % neuronsLayer(1))
+		    write(*, fString) (config % wh1(i, k), k = 1, config % neuronsLayer(1))
                 ENDDO
 
                 read(12, '(A)') dummy
                 write(13, '(A)') dummy
+                write(*, '(A)') dummy
                 read(12, fString) (config % bh1(k), k = 1, config % neuronsLayer(1))
                 write(13, fString) (config % bh1(k), k = 1, config % neuronsLayer(1))
+		write(*, fString) (config % bh1(k), k = 1, config % neuronsLayer(1))
 
+                write(*, '(I3)') config % hiddenLayers
+                
                 if (config % hiddenLayers == 2) then
+                    allocate(config % bh2(config % neuronsLayer(2)))
+                    allocate(config % wh2(config % neuronsLayer(1), config % neuronsLayer(2)))
+                    allocate(config % ws(config % neuronsLayer(2), config % nOutputs))
+
                     read(12, '(A)') dummy
                     write(13, '(A)') dummy
-                    fString = '(   F8.5)'
+                    write(*, '(A)') dummy
+                    fString = '(   F11.5)'
                     write(fString(2:4), '(I3)') config % neuronsLayer(2)
                     DO i = 1, config % neuronsLayer(1)
                         read(12, fString) (config % wh2(i, k), k = 1, config % neuronsLayer(2))
                         write(13, fString) (config % wh2(i, k), k = 1, config % neuronsLayer(2))
+                        write(*, fString) (config % wh2(i, k), k = 1, config % neuronsLayer(2))
                     ENDDO
 
                     read(12, '(A)') dummy
                     write(13, '(A)') dummy
+                    write(*, '(A)') dummy
                     read(12, fString) (config % bh2(k), k = 1, config % neuronsLayer(2))
                     write(13, fString) (config % bh2(k), k = 1, config % neuronsLayer(2))
+                    write(*, fString) (config % bh2(k), k = 1, config % neuronsLayer(2))
 
                     read(12, '(A)') dummy
                     write(13, '(A)') dummy
-                    fString = '(   F8.5)'
+                    write(*, '(A)') dummy
+                    fString = '(   F11.5)'
                     write(fString(2:4), '(I3)') config % nOutputs
                     DO i = 1, config % neuronsLayer(2)
                         read(12, fString) (config % ws(i, k), k = 1, config % nOutputs)
                         write(13, fString) (config % ws(i, k), k = 1, config % nOutputs)
+                        write(*, fString) (config % ws(i, k), k = 1, config % nOutputs)
                     ENDDO
                 else
                     read(12, '(A)') dummy
                     write(13, '(A)') dummy
-                    fString = '(   F8.5)'
+                    write(*, '(A)') dummy
+                    fString = '(   F11.5)'
                     write(fString(2:4), '(I3)') config % nOutputs
+                    allocate(config % ws(config % neuronsLayer(1), config % nOutputs))
                     DO i = 1, config % neuronsLayer(1)
                         read(12, fString) (config % ws(i, k), k = 1, config % nOutputs)
                         write(13, fString) (config % ws(i, k), k = 1, config % nOutputs)
+                        write(*, fString) (config % ws(i, k), k = 1, config % nOutputs)
                     ENDDO
                 end if
 
@@ -190,7 +229,8 @@ REAL(8) FUNCTION neuralNetwork(config)
 
     double precision, parameter :: a = 1
 
-    integer :: i, j ! variavel para controle do programa
+    integer :: i, j, k ! variavel para controle do programa
+    character(32) :: fString
 
     !Bias 1. camada oculta
     allocate(error(config % nOutputs, config % nClasses))
@@ -227,7 +267,6 @@ REAL(8) FUNCTION neuralNetwork(config)
     !----------------------------------------------------------------------!
 
     DO i = 1, config % nClasses
-
         ! ATIVACAO CAMADA OCULTA 1
         vh1 = 0.d0
         vh1 = matmul(x_gen(:, i), config % wh1)
@@ -276,14 +315,17 @@ REAL(8) FUNCTION neuralNetwork(config)
 
         ! CALCULO ERRO TREINAMENTO
         error(:, i) = y_gen(:, i) - ys(:, i)
+	write(*,*) y_gen(:, i), ys(:, i)
 
     ENDDO
     eqm = sum(error)
     eqm = (1.d0/(config % nClasses)) * eqm
 
     open(12, file = './output/result_ys.out')
+    fString = '(   F11.5)'
+    write(fString(2:4), '(I3)') config % nOutputs
     do i = 1, config % nOutputs
-        write(12, '(424F8.5)') (ys(i, j), j = 1, config % nClasses)
+        write(12, fString) (ys(i, j), j = 1, config % nClasses)
     end do
     close(12)
 
