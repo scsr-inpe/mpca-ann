@@ -10,7 +10,11 @@ sudo apt install openmpi-bin libopenmpi-dev
 
 ##0.1- Installing
 
--- Download the repository from BitBucket
+-- Download the repository from GitHub
+
+```
+git clone https://github.com/scsr-inpe/mpca-ann.git
+```
 
 -- Go to the folder and create the subdirectory build
 
@@ -178,7 +182,7 @@ To run the generalization simply execute the following command:
 
 ## Contributors
 
-Haroldo F. Campos Velho, Juliana Anochi, Sabrina Sambati, Eduardo Luz, Reynier Hernández Torres
+Haroldo F. Campos Velho, Juliana Anochi (@juliana-anochi), Sabrina Sambati (@sabrinabms), Eduardo Luz, Reynier Hernández Torres (@reynierhdez)
 
 ## License
 
