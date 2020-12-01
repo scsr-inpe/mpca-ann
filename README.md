@@ -29,7 +29,7 @@ mkdir build
 make
 ```
 
-## 1.- How to configure the experiments##
+## 1.- How to configure the experiments
 
 The experiment configuration and the control parameters of the optimization algorithm are set in the file `configuration.ini` which is located in the subdirectory `config`:
 
