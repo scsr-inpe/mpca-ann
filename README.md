@@ -1,6 +1,6 @@
-#Readme#
+# Readme
 
-##0.- Prerequisites
+## 0.- Prerequisites
 
 -- Install openmpi
 
@@ -8,7 +8,7 @@
 sudo apt install openmpi-bin libopenmpi-dev
 ```
 
-##0.1- Installing
+## 0.1- Installing
 
 -- Download the repository from GitHub
 
@@ -29,11 +29,11 @@ mkdir build
 make
 ```
 
-##1.- How to configure the experiments##
+## 1.- How to configure the experiments##
 
 The experiment configuration and the control parameters of the optimization algorithm are set in the file `configuration.ini` which is located in the subdirectory `config`:
 
-###1.1 Configuration of the neural networks model###
+### 1.1 Configuration of the neural networks model###
 * NCLASSES=8600, Number of patterns
 * NCLASSESVALIDATION=1000, Number of patterns for validation
 * NINPUTS=2, Number of inputs
@@ -44,7 +44,7 @@ The experiment configuration and the control parameters of the optimization algo
 * HAVEVALIDATION=T, If T, train with validation; if F, do not use validation
 * TRYINITIALARCHITECTURE=F, Try an initial (good?) architecture as initial solution. If F do not load. if V load configurations defined in 1.3.
 
-###1.2 Limits (search space) of the architecture of the neural network and the training parameters###
+### 1.2 Limits (search space) of the architecture of the neural network and the training parameters###
 * LOWER_HIDDEN_LAYERS=1,
 * UPPER_HIDDEN_LAYERS=2,
 * LOWER_FIRST_HIDDEN_LAYER=1,
@@ -58,7 +58,7 @@ The experiment configuration and the control parameters of the optimization algo
 * LOWER_ETA=1.0E-2,
 * UPPER_ETA=1.0,
 
-###1.3 Initial topology of the neural network###
+### 1.3 Initial topology of the neural network###
 * INITIAL_HIDDEN_LAYERS=1, Number of hidden layers. Discrete [1; 2]
 * INITIAL_FIRST_HIDDEN_LAYER=10, Number of neurons in the first hiden layer. Discrete  [1 - 40]
 * INITIAL_SECOND_HIDDEN_LAYER=0, Number of neurons in the second hiden layer. Discrete  [1 - 40]
@@ -66,7 +66,7 @@ The experiment configuration and the control parameters of the optimization algo
 * INITIAL_ALPHA=0.0, Momentum rate - alpha. Continuous [0.01 - 0.9]
 * INITIAL_ETA=0.94, Learning rate - eta. Continuous [0.01 - 1]
 
-###Configuration of the optimization algorithm###
+### 1.4 Configuration of the optimization algorithm###
 
 Multi-particla collision algorithm
 
@@ -95,24 +95,24 @@ General
 
 * VERBOSE=T, Displays extended information
 
-##2.- Data##
+## 2.- Data
 
-###Training data###
+### 2.1 Training data
 The training data are loaded from the files ``data/x.txt`` and ``data/y.txt``. Data is formated as F8.5 in Fortran, as ``      -0.07621``, with eight places before the decimal point and five decimal places.
 Columns represent the inputs or the output, while rows contain the classes.
 
-###Validation data###
+### 2.2 Validation data
 
 The validation data are loaded from the files ``data/x_valid.txt`` and ``data/y_valid.txt``. Data is formated as F8.5 in Fortran, as ``      -0.07621``, with eight places before the decimal point and five decimal places.
 Columns represent the inputs or the output, while rows contain the classes.
 
-##3.- How to run the auto-configuration of the neural network##
+## 3.- How to run the auto-configuration of the neural network
 
 ```
 ./runMPCA E P
 ```
 
-where E is the total of experiments and P is the number of processors to be used.
+where E is the total of experiments, and P is the number of processors to be used.
 
 For example,
 
@@ -122,7 +122,7 @@ For example,
 
 runs the five experiments with four processor working.
 
-##4.- Output data##
+## 4.- Output data
 
 After the optimization process, the best configurations found will be available in the output folder.
 
@@ -163,16 +163,16 @@ Epoch :       200
 NFE:         22
 ```
 
-##4.- Using the best model found##
+## 5.- Using the best model found
 
-###Generalization data###
+### Generalization data
 
 The generalization data are loaded from the files ``data/x_gen.txt`` and ``data/y_gen.txt``. Data is formated as F8.5 in Fortran, as ``      -0.07621``, with eight places before the decimal point and five decimal places.
 Columns represent the inputs or the output, while rows contain the classes.
 
 The file ``config/annConfig.in`` has the configuration. the first line represent the classes, the second line is the number of inputs, and the third, the number of outputs
 
-###Running the generalization process###
+### Running the generalization process
 
 To run the generalization simply execute the following command:
 
