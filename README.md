@@ -182,7 +182,11 @@ To run the generalization simply execute the following command:
 
 ## Contributors
 
-Haroldo F. Campos Velho, Juliana Anochi (@juliana-anochi), Sabrina Sambati (@sabrinabms), Eduardo Luz, Reynier Hernández Torres (@reynierhdez)
+Haroldo F. Campos Velho
+Juliana Anochi @juliana-anochi
+Sabrina Sambati @sabrinabms
+Eduardo Luz
+Reynier Hernández Torres @reynierhdez
 
 ## License
 
