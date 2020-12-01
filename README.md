@@ -5,7 +5,9 @@
 -- Install openmpi
 
 ```
-sudo apt install openmpi-bin libopenmpi-dev
+sudo apt update
+sudo apt upgrade
+sudo apt install build-essential git gfortran openmpi-bin libopenmpi-dev
 ```
 
 ## 0.1- Installing
