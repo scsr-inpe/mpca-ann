@@ -33,7 +33,7 @@ make
 
 The experiment configuration and the control parameters of the optimization algorithm are set in the file `configuration.ini` which is located in the subdirectory `config`:
 
-### 1.1 Configuration of the neural networks model###
+### 1.1 Configuration of the neural networks model
 * NCLASSES=8600, Number of patterns
 * NCLASSESVALIDATION=1000, Number of patterns for validation
 * NINPUTS=2, Number of inputs
@@ -44,7 +44,7 @@ The experiment configuration and the control parameters of the optimization algo
 * HAVEVALIDATION=T, If T, train with validation; if F, do not use validation
 * TRYINITIALARCHITECTURE=F, Try an initial (good?) architecture as initial solution. If F do not load. if V load configurations defined in 1.3.
 
-### 1.2 Limits (search space) of the architecture of the neural network and the training parameters###
+### 1.2 Limits (search space) of the architecture of the neural network and the training parameters
 * LOWER_HIDDEN_LAYERS=1,
 * UPPER_HIDDEN_LAYERS=2,
 * LOWER_FIRST_HIDDEN_LAYER=1,
@@ -58,7 +58,7 @@ The experiment configuration and the control parameters of the optimization algo
 * LOWER_ETA=1.0E-2,
 * UPPER_ETA=1.0,
 
-### 1.3 Initial topology of the neural network###
+### 1.3 Initial topology of the neural network
 * INITIAL_HIDDEN_LAYERS=1, Number of hidden layers. Discrete [1; 2]
 * INITIAL_FIRST_HIDDEN_LAYER=10, Number of neurons in the first hiden layer. Discrete  [1 - 40]
 * INITIAL_SECOND_HIDDEN_LAYER=0, Number of neurons in the second hiden layer. Discrete  [1 - 40]
@@ -66,7 +66,7 @@ The experiment configuration and the control parameters of the optimization algo
 * INITIAL_ALPHA=0.0, Momentum rate - alpha. Continuous [0.01 - 0.9]
 * INITIAL_ETA=0.94, Learning rate - eta. Continuous [0.01 - 1]
 
-### 1.4 Configuration of the optimization algorithm###
+### 1.4 Configuration of the optimization algorithm
 
 Multi-particla collision algorithm
 
