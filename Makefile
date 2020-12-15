@@ -2,13 +2,13 @@
 #CC=ftn 
 
 #Compilador 
-CC= mpif90 
+FC = mpif90
 
 # Opcoes de compilacao
-CFLAG= -c -O3 -g
+FFLAGS = -c -O3 -g
 
 # Opcoes de otimizacao
-CFLAGOPT= -O3 -g
+FFLAGSOPT = -O3 -g
 
 VPATH = src
 MODDIR = mod
@@ -52,17 +52,17 @@ all: 	$(BUILDDIR)/foul.o \
 	annActivation
 
 annMPCA:
-	$(CC) $(CFLAGOPT) -o annMPCA $(SRCMPCA)
+	$(FC) $(FFLAGSOPT) -o annMPCA $(SRCMPCA)
 
 annMLP:
-	$(CC) $(CFLAGOPT) -o annMLP $(SRCMLP)
+	$(FC) $(FFLAGSOPT) -o annMLP $(SRCMLP)
 
 annActivation:
-	$(CC) $(CFLAGOPT) -o annActivation $(SRCACTIVATION)
+	$(FC) $(FFLAGSOPT) -o annActivation $(SRCACTIVATION)
 
 $(BUILDDIR)/%.o: $(VPATH)/%.f90
 	@mkdir -p $(@D)
-	$(CC) $(CFLAG) $< -o $@
+	$(FC) $(FFLAGS) $< -o $@
 
 clean:	removemod
 	rm -rf *.*~ Makefile~ build/*.o *.mod annActivation annMLP annMPCA
