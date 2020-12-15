@@ -36,7 +36,7 @@ $(BUILDDIR)/annActivation.o \
 $(BUILDDIR)/main_activation.o
 
 
-all: clean $(BUILDDIR)/foul.o \
+all: 	$(BUILDDIR)/foul.o \
 	$(BUILDDIR)/newTypes.o \
 	$(BUILDDIR)/uniformR8.o \
 	$(BUILDDIR)/normalR8.o \
@@ -49,8 +49,7 @@ all: clean $(BUILDDIR)/foul.o \
 	$(BUILDDIR)/main_activation.o \
 	annMPCA \
 	annMLP \
-	annActivation \
-	removemod
+	annActivation
 
 annMPCA:
 	$(CC) $(CFLAGOPT) -o annMPCA $(SRCMPCA)
@@ -65,7 +64,7 @@ $(BUILDDIR)/%.o: $(VPATH)/%.f90
 	@mkdir -p $(@D)
 	$(CC) $(CFLAG) $< -o $@
 
-clean:
+clean:	removemod
 	rm -rf *.*~ Makefile~ build/*.o *.mod annActivation annMLP annMPCA
 
 removemod:
