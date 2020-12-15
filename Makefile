@@ -62,6 +62,7 @@ annActivation:
 	$(CC) $(CFLAGOPT) -o annActivation $(SRCACTIVATION)
 
 $(BUILDDIR)/%.o: $(VPATH)/%.f90
+	@mkdir -p $(@D)
 	$(CC) $(CFLAG) $< -o $@
 
 clean:
