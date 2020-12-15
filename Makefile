@@ -14,6 +14,28 @@ VPATH = src
 MODDIR = mod
 BUILDDIR = build
 
+# Arquivos objeto do annMPCA
+SRCMPCA := $(BUILDDIR)/foul.o \
+$(BUILDDIR)/uniformR8.o \
+$(BUILDDIR)/newTypes.o \
+$(BUILDDIR)/normalR8.o \
+$(BUILDDIR)/annTraining.o \
+$(BUILDDIR)/mpcaFunctions.o \
+$(BUILDDIR)/mpca.o
+
+# Arquivos objeto do annMLP
+SRCMLP := $(BUILDDIR)/foul.o \
+$(BUILDDIR)/newTypes.o \
+$(BUILDDIR)/annGeneralization.o \
+$(BUILDDIR)/main_generalization.o
+
+# Arquivos objeto do annActivation
+SRCACTIVATION := $(BUILDDIR)/foul.o \
+$(BUILDDIR)/newTypes.o \
+$(BUILDDIR)/annActivation.o \
+$(BUILDDIR)/main_activation.o
+
+
 all: clean $(BUILDDIR)/foul.o \
 	$(BUILDDIR)/newTypes.o \
 	$(BUILDDIR)/uniformR8.o \
@@ -29,15 +51,15 @@ all: clean $(BUILDDIR)/foul.o \
 	annMLP \
 	annActivation \
 	removemod
-	
-annMPCA: 
-	$(CC) $(CFLAGOPT) -o annMPCA $(BUILDDIR)/foul.o $(BUILDDIR)/uniformR8.o $(BUILDDIR)/newTypes.o $(BUILDDIR)/normalR8.o $(BUILDDIR)/annTraining.o $(BUILDDIR)/mpcaFunctions.o $(BUILDDIR)/mpca.o
 
-annMLP:	
-	$(CC) $(CFLAGOPT) -o annMLP $(BUILDDIR)/foul.o $(BUILDDIR)/newTypes.o $(BUILDDIR)/annGeneralization.o $(BUILDDIR)/main_generalization.o
-	
+annMPCA:
+	$(CC) $(CFLAGOPT) -o annMPCA $(SRCMPCA)
+
+annMLP:
+	$(CC) $(CFLAGOPT) -o annMLP $(SRCMLP)
+
 annActivation:
-	$(CC) $(CFLAGOPT) -o annActivation $(BUILDDIR)/foul.o $(BUILDDIR)/newTypes.o $(BUILDDIR)/annActivation.o $(BUILDDIR)/main_activation.o
+	$(CC) $(CFLAGOPT) -o annActivation $(SRCACTIVATION)
 
 $(BUILDDIR)/%.o: $(VPATH)/%.f90
 	$(CC) $(CFLAG) $< -o $@
