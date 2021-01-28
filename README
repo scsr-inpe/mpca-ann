@@ -99,7 +99,7 @@ Columns represent the inputs or the output, while rows contain the classes.
 
 ###Validation data###
 
-The validation data are loaded from the files ``data/x_valid.txt`` and ``data/y_valid.txt``. Data is formated as F8.5 in Fortran, as ``      -0.07621``, with eight places before the decimal point and five decimal places.
+The validation data are loaded from the files ``data/x_valid.txt`` and ``data/y_valid.txt``, where ``x_valid.txt`` represents the input set and ``y_valid.txt`` the output set. Data is formated as F8.5 in Fortran, as ``      -0.07621``, with eight places before the decimal point and five decimal places.
 Columns represent the inputs or the output, while rows contain the classes.
 
 ##3.- How to run the auto-configuration of the neural network##
@@ -126,12 +126,12 @@ The ``final.out`` shows a summary of the experiments. Each line represents an ex
 
 ```
   Objective function; 
-  Number of hidden layers; 
-  Number of neurons in the first hiden layer;
-  Number of neurons in the second hiden layer;
-  Activation function. Discrete [(1) logistic; (2) tangent; (3) gaussian];
-  Momentum rate;
-  Learning rate.
+ * Number of hidden layers; 
+ * Number of neurons in the first hiden layer;
+ * Number of neurons in the second hiden layer;
+ * Activation function. Discrete [(1) logistic; (2) tangent; (3) gaussian];
+ * Momentum rate;
+ * Learning rate.
   
   For example,
  
@@ -174,7 +174,7 @@ NFE:         22
 
 ###Generalization data###
 
-The generalization data are loaded from the files ``data/x_gen.txt`` and ``data/y_gen.txt``. Data is formated as F8.5 in Fortran, as ``      -0.07621``, with eight places before the decimal point and five decimal places.
+The generalization data are loaded from the files ``data/x_gen.txt`` and ``data/y_gen.txt``, where ``x_gen.txt`` represents the input set and ``y_gen.txt`` the output set. Data is formated as F8.5 in Fortran, as ``      -0.07621``, with eight places before the decimal point and five decimal places.
 Columns represent the inputs or the output, while rows contain the classes.
 
 The file ``config/annConfig.in`` has the configuration. the first line represent the classes, the second line is the number of inputs, and the third, the number of outputs
