@@ -64,7 +64,7 @@ The experiment configuration and the control parameters of the optimization algo
 
 ###Configuration of the optimization algorithm###
 
-Multi-particla collision algorithm
+Multi-particle collision algorithm
 
 * VALUE_TO_REACH=1.0E-7, Stopping criterium. Minimum value of the objective function.
 * PARTICLES_PROCESSOR=10, Number of particles in each processor
@@ -94,7 +94,7 @@ General
 ##2.- Data##
 
 ###Training data###
-The training data are loaded from the files ``data/x.txt`` and ``data/y.txt``. Data is formated as F8.5 in Fortran, as ``      -0.07621``, with eight places before the decimal point and five decimal places.
+The training data are loaded from the files ``data/x.txt`` and ``data/y.txt``, where ``x.txt`` represents the input set and ``y.txt`` the output set. Data is formated as F8.5 in Fortran, as ``      -0.07621``, with eight places before the decimal point and five decimal places.
 Columns represent the inputs or the output, while rows contain the classes.
 
 ###Validation data###
