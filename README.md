@@ -130,15 +130,13 @@ After the optimization process, the best configurations found will be available 
 
 The ``final.out`` shows a summary of the experiments. Each line represents an experiment:
 
-```
-  Objective function;
+ * Objective function minimum value;
  * Number of hidden layers;
  * Number of neurons in the first hiden layer;
  * Number of neurons in the second hiden layer;
  * Activation function. Discrete [(1) logistic; (2) tangent; (3) gaussian];
  * Momentum rate;
  * Learning rate.
-```
 
   For example,
 
