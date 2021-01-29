@@ -70,7 +70,7 @@ The experiment configuration and the control parameters of the optimization algo
 
 ### 1.4 Configuration of the optimization algorithm
 
-Multi-particla collision algorithm
+Multi-particle collision algorithm
 
 * VALUE_TO_REACH=1.0E-7, Stopping criterium. Minimum value of the objective function.
 * PARTICLES_PROCESSOR=10, Number of particles in each processor
@@ -84,7 +84,7 @@ Multi-particla collision algorithm
 Opposition (Hybrid variant)
 
 * ENABLE_OPPOSITION=T, Enable opposition. If T, enables opposition. If F, dissables opposition
-* TYPE_OPPOSITION="MPCA", Opposition type: MPCA (sem Oposição), ...
+* TYPE_OPPOSITION="MPCA", Opposition type: MPCA (without opposition), ...
 
 Hooke-Jeeve - Intensification phase (Hybrid variant)
 
@@ -99,13 +99,13 @@ General
 
 ## 2.- Data
 
-### 2.1 Training data
-The training data are loaded from the files ``data/x.txt`` and ``data/y.txt``. Data is formated as F8.5 in Fortran, as ``      -0.07621``, with eight places before the decimal point and five decimal places.
+###Training data###
+The training data are loaded from the files ``data/x.txt`` and ``data/y.txt``, where ``x.txt`` represents the input set and ``y.txt`` the output set. Data is formated as F8.5 in Fortran, as ``      -0.07621``, with eight places before the decimal point and five decimal places.
 Columns represent the inputs or the output, while rows contain the classes.
 
 ### 2.2 Validation data
 
-The validation data are loaded from the files ``data/x_valid.txt`` and ``data/y_valid.txt``. Data is formated as F8.5 in Fortran, as ``      -0.07621``, with eight places before the decimal point and five decimal places.
+The validation data are loaded from the files ``data/x_valid.txt`` and ``data/y_valid.txt``, where ``x_valid.txt`` represents the input set and ``y_valid.txt`` the output set. Data is formated as F8.5 in Fortran, as ``      -0.07621``, with eight places before the decimal point and five decimal places.
 Columns represent the inputs or the output, while rows contain the classes.
 
 ## 3.- How to run the auto-configuration of the neural network
@@ -129,6 +129,17 @@ runs the five experiments with four processor working.
 After the optimization process, the best configurations found will be available in the output folder.
 
 The ``final.out`` shows a summary of the experiments. Each line represents an experiment:
+
+```
+  Objective function;
+ * Number of hidden layers;
+ * Number of neurons in the first hiden layer;
+ * Number of neurons in the second hiden layer;
+ * Activation function. Discrete [(1) logistic; (2) tangent; (3) gaussian];
+ * Momentum rate;
+ * Learning rate.
+
+  For example,
 
 ```
   8.540212E-02 1  5  0 1  3.771149E-01  3.906986E-01
@@ -169,7 +180,7 @@ NFE:         22
 
 ### Generalization data
 
-The generalization data are loaded from the files ``data/x_gen.txt`` and ``data/y_gen.txt``. Data is formated as F8.5 in Fortran, as ``      -0.07621``, with eight places before the decimal point and five decimal places.
+The generalization data are loaded from the files ``data/x_gen.txt`` and ``data/y_gen.txt``, where ``x_gen.txt`` represents the input set and ``y_gen.txt`` the output set. Data is formated as F8.5 in Fortran, as ``      -0.07621``, with eight places before the decimal point and five decimal places.
 Columns represent the inputs or the output, while rows contain the classes.
 
 The file ``config/annConfig.in`` has the configuration. the first line represent the classes, the second line is the number of inputs, and the third, the number of outputs
@@ -179,7 +190,15 @@ The file ``config/annConfig.in`` has the configuration. the first line represent
 To run the generalization simply execute the following command:
 
 ```
-./annMLP
+./annMLP E P
+```
+
+where E is the total of experiments and P is the number of processors to be used.
+
+For example,
+
+```
+./annMLP 5 4
 ```
 
 ## Contributors
@@ -193,4 +212,3 @@ Reynier Hernández Torres @reynierhdez
 ## License
 
 ---
-
