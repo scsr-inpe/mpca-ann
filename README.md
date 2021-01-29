@@ -138,6 +138,7 @@ The ``final.out`` shows a summary of the experiments. Each line represents an ex
  * Activation function. Discrete [(1) logistic; (2) tangent; (3) gaussian];
  * Momentum rate;
  * Learning rate.
+```
 
   For example,
 
@@ -203,11 +204,11 @@ For example,
 
 ## Contributors
 
-Haroldo F. Campos Velho
-Juliana Anochi @juliana-anochi
-Sabrina Sambati @sabrinabms
-Eduardo Luz
-Reynier Hernández Torres @reynierhdez
+*Haroldo F. Campos Velho
+*Juliana Anochi @juliana-anochi
+*Sabrina Sambati @sabrinabms
+*Eduardo Luz
+*Reynier Hernández Torres @reynierhdez
 
 ## License
 
