@@ -204,11 +204,11 @@ For example,
 
 ## Contributors
 
-*Haroldo F. Campos Velho
-*Juliana Anochi @juliana-anochi
-*Sabrina Sambati @sabrinabms
-*Eduardo Luz
-*Reynier Hernández Torres @reynierhdez
+* Haroldo F. Campos Velho
+* Juliana Anochi @juliana-anochi
+* Sabrina Sambati @sabrinabms
+* Eduardo Luz
+* Reynier Hernández Torres @reynierhdez
 
 ## License
 
