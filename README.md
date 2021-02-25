@@ -100,10 +100,15 @@ General
 ## 2.- Data
 
 ###Training data###
+
 The training data are loaded from the files ``data/x.txt`` and ``data/y.txt``, where ``x.txt`` represents the input set and ``y.txt`` the output set. Data is formated as F8.5 in Fortran, as ``      -0.07621``, with eight places before the decimal point and five decimal places.
 Columns represent the inputs or the output, while rows contain the classes.
 
 ### 2.2 Validation data
+=======
+###Cross-validation###
+
+The training dataset can be divided into two sets: training and cross-validation. The cross-validation dataset is used to check the overfitting problem and validate the trained network. Training should be stopped when the error in the validation starts to rise consistently.
 
 The validation data are loaded from the files ``data/x_valid.txt`` and ``data/y_valid.txt``, where ``x_valid.txt`` represents the input set and ``y_valid.txt`` the output set. Data is formated as F8.5 in Fortran, as ``      -0.07621``, with eight places before the decimal point and five decimal places.
 Columns represent the inputs or the output, while rows contain the classes.
@@ -130,6 +135,7 @@ After the optimization process, the best configurations found will be available 
 
 The ``final.out`` shows a summary of the experiments. Each line represents an experiment:
 
+```
  * Objective function minimum value;
  * Number of hidden layers;
  * Number of neurons in the first hiden layer;
