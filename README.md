@@ -144,13 +144,13 @@ The ``final.out`` shows a summary of the experiments. Each line represents an ex
 
   For example,
 
-```
   8.540212E-02 1  5  0 1  3.771149E-01  3.906986E-01
 ```
 
 The output folder contains files ``ann#.best``. This files contains the best configuration found in the experiment with number #.
 
 An output file is formated as follows:
+
 ```
   8.536407E-02
   1
