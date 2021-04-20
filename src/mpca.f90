@@ -241,13 +241,14 @@ PROGRAM MPCA
     fString = '(      F8.5)'
     write(fString(2:7), '(I6)') op % nClasses
 
-    OPEN (2, file = './data/x.txt')
+    OPEN (2, file = '/data/x.txt')
     DO i = 1, op % nInputs
+        write(*,*) i
         READ(2, fString) (op % x(i, j), j = 1, op % nClasses)
     END DO
     CLOSE (2)
 
-    OPEN (1, file = './data/y.txt')
+    OPEN (1, file = '/data/y.txt')
     DO I = 1, op % nOutputs
         READ(1, fString) (op % y(i, j), j = 1, op % nClasses)
     END DO
