@@ -392,14 +392,14 @@ PROGRAM MPCA
         OPEN(UNIT = 20, FILE = './output/final.out', ACCESS = 'APPEND')
         
         write(20, '(ES14.6E2)', ADVANCE = 'NO') bestParticleProcessor % fitness
-        write(20, '(I2)', ADVANCE = 'NO') nint(bestParticleProcessor % solution(1))
-        write(20, '(I3)', ADVANCE = 'NO') nint(bestParticleProcessor % solution(2))
-        if (nint(bestParticleProcessor % solution(1)) == 2) then
-            write(20, '(I3)', ADVANCE = 'NO') nint(bestParticleProcessor % solution(3))
+        write(20, '(I2)', ADVANCE = 'NO') ceiling(bestParticleProcessor % solution(1))
+        write(20, '(I3)', ADVANCE = 'NO') ceiling(bestParticleProcessor % solution(2))
+        if (ceiling(bestParticleProcessor % solution(1)) == 2) then
+            write(20, '(I3)', ADVANCE = 'NO') ceiling(bestParticleProcessor % solution(3))
         else
             write(20, '(I3)', ADVANCE = 'NO') 0
         end if
-        write(20, '(I2)', ADVANCE = 'NO') nint(bestParticleProcessor % solution(4))
+        write(20, '(I2)', ADVANCE = 'NO') ceiling(bestParticleProcessor % solution(4))
         write(20, '(ES14.6E2)', ADVANCE = 'NO') bestParticleProcessor % solution(5)
         write(20, '(ES14.6E2)') bestParticleProcessor % solution(6)
         
@@ -417,16 +417,16 @@ PROGRAM MPCA
                 real_to_string_scientific(bestParticleProcessor % fitness, 1, 4, 3), 'normal')
         
             call write_formatted('Number of hidden layers: ', 'bright normal', &
-                integer_to_string(nint(bestParticleProcessor % solution(1)), 2), 'normal')
+                integer_to_string(ceiling(bestParticleProcessor % solution(1)), 2), 'normal')
             call write_formatted('Neurons in hidden layer 1: ', 'bright normal', &
-                integer_to_string(nint(bestParticleProcessor % solution(2)), 2), 'normal')
-            if (nint(bestParticleProcessor % solution(1)) == 2) then
+                integer_to_string(ceiling(bestParticleProcessor % solution(2)), 2), 'normal')
+            if (ceiling(bestParticleProcessor % solution(1)) == 2) then
                 call write_formatted('Neurons in hidden layer 2: ', 'bright normal', &
-                    integer_to_string(nint(bestParticleProcessor % solution(3)), 2), 'normal')
+                    integer_to_string(ceiling(bestParticleProcessor % solution(3)), 2), 'normal')
             end if
             
             call write_formatted('Activation function: ', 'bright normal', &
-                integer_to_string(nint(bestParticleProcessor % solution(4)), 2), 'normal')
+                integer_to_string(ceiling(bestParticleProcessor % solution(4)), 2), 'normal')
             
             call write_formatted('Alpha: ', 'bright normal', &
                 real_to_string(bestParticleProcessor % solution(5), 1, 4), 'normal')
