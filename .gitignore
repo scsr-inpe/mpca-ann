@@ -34,3 +34,6 @@ annActivation
 annMLP
 annMPCA
 
+# Output files
+*.out
+*.best
