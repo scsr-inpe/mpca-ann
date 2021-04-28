@@ -280,6 +280,7 @@ PROGRAM MPCA
     st % lastUpdate = 0
     st % totalNFE = 0
     st % higherNFE = 0
+    st % iBest = 0
     st % flag = .false.
     st % bestObjectiveFunction = huge(0.D0)
     st % doStop = .false.
@@ -363,7 +364,7 @@ PROGRAM MPCA
                 end if
             END DO
 
-            call blackboard(bestParticleProcessor, st % NFE, st % higherNFE, st % totalNFE, st % doStop, doStopMPCA, op)
+            call blackboard(bestParticleProcessor, st % NFE, st % higherNFE, st % totalNFE, st % doStop, doStopMPCA, op, st)
             
             DO contP = 1, op % nParticlesProcessor
                 bestParticle(contP) = bestParticleProcessor
@@ -382,13 +383,14 @@ PROGRAM MPCA
         end if
     END DO
     
-    call blackboard(bestParticleProcessor, st % NFE, st % higherNFE, st % totalNFE, st % doStop, doStopMPCA, op)
+    call blackboard(bestParticleProcessor, st % NFE, st % higherNFE, st % totalNFE, st % doStop, doStopMPCA, op, st)
             
     DO contP = 1, op % nParticlesProcessor
         bestParticle(contP) = bestParticleProcessor
     END DO
 
-    if (op % iProcessor == 0) then    
+    if (op % iProcessor == 0) then
+        call copyFileBest(op, st)
         OPEN(UNIT = 20, FILE = './output/final.out', ACCESS = 'APPEND')
         
         write(20, '(ES14.6E2)', ADVANCE = 'NO') bestParticleProcessor % fitness

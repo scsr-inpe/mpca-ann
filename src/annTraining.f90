@@ -472,11 +472,16 @@ CONTAINS
 
             OPEN(12, FILE = './output/ann' // trim(str1) // '_' // trim(str0) // '.out')
 
+            write(12, '(A)', advance = 'no') 'Objective Function (MPCA): '
             write(12, '(ES14.6E2)') st % bestObjectiveFunction
-	    write(12, '(I3)') config % activationFunction
+            write(12, '(A)', advance = 'no') 'Activation Function: '
+     	    write(12, '(I3)') config % activationFunction
+     	    write(12, '(A)', advance = 'no') 'Hidden Layers: '
             write(12, '(I3)') config % hiddenLayers
+            write(12, '(A)', advance = 'no') 'Neurons First Layer: '
             write(12, '(I3)') config % neuronsLayer(1)
             if (config % hiddenLayers == 2) then
+                write(12, '(A)', advance = 'no') 'Neurons Second Layer: '
                 write(12, '(I3)') config % neuronsLayer(2)
             end if
 
@@ -547,6 +552,8 @@ CONTAINS
 
             CLOSE(12)
         end if
+        
+        neuralNetworkTraining = st % bestObjectiveFunction
 
         deallocate(error)
         deallocate(errorClass)

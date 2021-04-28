@@ -184,13 +184,13 @@ CONTAINS
     !********************************************************************
     !********************************************************************
     !********************************************************************
-    SUBROUTINE blackboard(bo, NFE, higherNFE, totalNFE, doStop, doStopMPCA, op)
+    SUBROUTINE blackboard(bo, NFE, higherNFE, totalNFE, doStop, doStopMPCA, op, st)
     USE newtypes
 
     implicit none
     INCLUDE 'mpif.h'
 
-    INTEGER :: i, iBest, j, ierr, status(MPI_STATUS_SIZE), stopCount
+    INTEGER :: i, j, ierr, status(MPI_STATUS_SIZE), stopCount
     INTEGER (kind=8), INTENT(in) :: NFE
     INTEGER (kind=8), INTENT(inout) :: higherNFE, totalNFE
     INTEGER :: world_rank, world_size, nDimensions
@@ -198,6 +198,7 @@ CONTAINS
 
     type (Particle), intent(inout) :: bo
     TYPE(OptionsMPCA), intent(in) :: op
+    TYPE (StatusMPCA), INTENT(INOUT) :: st
     real (kind = 8), allocatable, dimension(:) :: send
 
     world_rank = op % iProcessor
@@ -205,7 +206,6 @@ CONTAINS
     nDimensions = op % nDimensions
     
     if (world_size == 1) then
-        call copyFileBest(op, 0)
         higherNFE = NFE
         totalNFE = NFE
         doStopMPCA = doStop
@@ -219,7 +219,6 @@ CONTAINS
         higherNFE = NFE
         totalNFE = NFE
 
-        iBest = 0
         DO i = 1, world_size - 1
             CALL MPI_Recv(send, nDimensions + 4, MPI_REAL8, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE, ierr)
 
@@ -234,7 +233,7 @@ CONTAINS
                     bo % solution(j) = send(j)
                 ENDDO
                 bo % fitness = send(nDimensions + 1)
-                iBest = i
+                st % iBest = i                
             ENDIF
 
             if (send(nDimensions + 3) > 0) then
@@ -257,10 +256,7 @@ CONTAINS
             doStopMPCA = .true.
         else
             doStopMPCA = .false.
-        end if
-        
-        call copyFileBest(op, iBest)
-
+        end if        
     ELSE
         DO i = 1, nDimensions
             send(i) = bo % solution(i)
@@ -505,19 +501,19 @@ END SUBROUTINE blackboard
     end function hooke
     
     
-    subroutine copyFileBest(op, iBest)
+    subroutine copyFileBest(op, st)
         implicit none
     
         character (100) :: str0, str1, filename, command
-        integer :: iBest
         TYPE(OptionsMPCA), intent(in) :: op
+        TYPE (StatusMPCA), INTENT(in) :: st
     
-        IF (iBest < 9) THEN
-            WRITE (str0, '(I1)') iBest + 1
-        ELSE IF (iBest < 99) THEN
-            WRITE (str0, '(I2)') iBest + 1
+        IF (st % iBest < 9) THEN
+            WRITE (str0, '(I1)') st % iBest + 1
+        ELSE IF (st % iBest < 99) THEN
+            WRITE (str0, '(I2)') st % iBest + 1
         ELSE
-            WRITE (str0, '(I3)') iBest + 1
+            WRITE (str0, '(I3)') st % iBest + 1
         END IF
     
         IF (op % iExperiment < 10) THEN
@@ -529,7 +525,7 @@ END SUBROUTINE blackboard
         END IF
 
         filename = './output/ann' // trim(str1) // '_' // trim(str0) // '.out'
-        command = 'cp ' // TRIM(filename) // ' ./output/ann' // trim(str1) // '.best'
+        command = 'cp ' // TRIM(filename) // ' ./output/ann' // trim(str1) // '_best.out'
         call system(TRIM(command))
         
     end subroutine copyFileBest
